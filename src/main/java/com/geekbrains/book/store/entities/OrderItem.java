@@ -12,26 +12,36 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 
-@Data
 @Entity
-@Table(name = "order_item")
+@Table(name = "order_items")
+@Data
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
 
     @Column(name = "count")
-    private long count;
+    private Integer count;
 
     @Column(name = "price")
-    private long price;
+    private BigDecimal price;
 
-    public OrderItem(long id, long count, long price) {
-        this.id = id;
-        this.count = count;
-        this.price = price;
-    }
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     public OrderItem(){}
+
+    public OrderItem(Book book) {
+        this.book = book;
+        this.count = 1;
+        this.price = book.getPrice();
+    }
+
+
 }
