@@ -27,7 +27,8 @@
     <br>
     <br>
     <h4>Список покупок:</h4>
-    <table class="table table-striped">
+    <p th:if="${books.size()==0}">Вы ничего не добавили в корзину</p>
+    <table class="table table-striped" th:if="${books.size()>0}">
         <thead>
         <tr>
             <td>Название</td>
@@ -37,9 +38,9 @@
         </thead>
         <tbody>
         <tr th:each="b : ${books}">
-            <td th:text="${allbooks.get(b.getId()).getTitle()}"></td>
+            <td th:text="${b.getBook().getTitle()}"></td>
             <td th:text="${b.getCount()}"></td>
-            <td th:text="${b.getPrice()*b.getCount()}"></td>
+            <td th:text="${b.getPrice()}"></td>
 
         </tr>
         <td>

@@ -29,13 +29,6 @@ values
 ('Bob Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob_johnson@gmail.com'),
 ('John Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john_johnson@gmail.com');
 
-insert into users_roles (user_id, role_id) values (1, 1), (1, 3);
-
-create table order_item(id bigserial primary key, count int, price int);
-
-create table ORDERS_ORDER_ITEM_LIST(id bigserial primary key, cart_id int, order_item_list_id int);
-
-create table orders(id bigserial primary key, order_id int, user_id int);
 
 create table books (id bigserial primary key, title varchar(255), description varchar(5000), price numeric(8, 2), publish_year int);
 insert into books (title, description, price, publish_year) values
@@ -50,3 +43,6 @@ insert into books (title, description, price, publish_year) values
 ('LOTR 2', 'Description 9', 900.0, 2004),
 ('LOTR 3', 'Description 10', 600.0, 2001),
 ('Hobbit', 'Description 11', 500.0, 2001);
+
+create table orders(id bigserial, user_id bigint, price numeric(8,2), primary key (id), foreign key (user_id) references users(id));
+create table order_items(id bigserial, order_id bigint, book_id bigint, count int, price numeric(8,2), primary key (id), foreign key (book_id) references books (id), foreign key (order_id) references orders(id));
