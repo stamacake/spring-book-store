@@ -10,7 +10,6 @@ import java.util.Map;
 @Getter
 public class BookFilter {
     private Specification<Book> spec;
-    private String filterParams;
 
     public BookFilter(Map<String, String> params) {
         spec = Specification.where(null);
@@ -20,8 +19,11 @@ public class BookFilter {
         if (params.containsKey("minPrice")) {
             spec = spec.and(BookSpecifications.priceGreaterOrEqualsThan(Integer.parseInt(params.get("minPrice"))));
         }
-        if (params.containsKey("titlePart")) {
-            spec = spec.and(BookSpecifications.titleLike(params.get("titlePart")));
+        if (params.containsKey("title")) {
+            spec = spec.and(BookSpecifications.titleLike(params.get("title")));
+        }
+        if (params.containsKey("publishYear")) {
+            spec = spec.and(BookSpecifications.publishYear(Integer.parseInt(params.get("publishYear"))));
         }
 
     }

@@ -1,0 +1,70 @@
+<!doctype html>
+<html ng-app="app" ng-controller="booksController">
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="logic.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container" align="center">
+    <h2>Фильтры</h2>
+    <form ng-submit="filter()" >
+
+        <div class="form-group">
+            <label>Название</label>
+            <input ng-model="books.title" type="text" class="form-control form-control-sm">
+        </div>
+
+        <div class="form-group">
+            <label>Минимальная цена</label>
+            <input ng-model="books.minPrice" type="number" class="form-control form-control-sm">
+        </div>
+
+        <div class="form-group">
+            <label>Максимальная цена</label>
+            <input ng-model="books.maxPrice" type="number" class="form-control form-control-sm">
+        </div>
+
+        <div class="form-group">
+            <label>Год издания</label>
+            <input ng-model="books.publishYear" type="number" class="form-control form-control-sm">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Применить</button>
+    </form>
+
+    <h1>Книги:</h1>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>Название</td>
+            <td>Жанр</td>
+            <td>Описание</td>
+            <td>Цена</td>
+            <td>Год издания</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="b in page.content">
+            <td>{{b.title}}</td>
+            <td>{{b.genre}}</td>
+            <td>{{b.description}}</td>
+            <td>{{b.price}}</td>
+            <td>{{b.publishYear}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <nav class="navbar navbar-default" role="navigation">
+        <ul class="pagination justify-content-center font-weight-bold">
+            <li ng-repeat="x in [].constructor(page.totalPages) track by $index" class="page-item">
+                <a class="page-link"ng-click="pagin($index + 1)" data-toggle="tooltip">
+                    {{$index + 1}}
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

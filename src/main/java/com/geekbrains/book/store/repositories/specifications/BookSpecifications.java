@@ -15,4 +15,7 @@ public class BookSpecifications {
     public static Specification<Book> titleLike(String titlePart) {
         return (Specification<Book>) (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.get("title"), String.format("%%%s%%", titlePart)); // where b.title like %titlePart%
     }
+    public static Specification<Book> publishYear(int publishYear) {
+        return (Specification<Book>) (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("publishYear"), publishYear);
+    }
 }
