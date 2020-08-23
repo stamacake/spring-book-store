@@ -32,11 +32,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticate")
                 .and()
-                .logout().logoutSuccessUrl("/");
+                .logout().logoutSuccessUrl("/")
 
 
-        //                .and()
-//                .csrf().disable()
+                        .and()
+                .csrf().disable();
 
 //                .loginPage("/login") // default GET /login
 //                .loginProcessingUrl("/authenticateTheUser") // default: POST /login
